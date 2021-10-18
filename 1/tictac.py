@@ -18,7 +18,7 @@ class TicTacGame:
         return self.field
 
     def validate_input(self, input):
-        """Возвращает True, если ввод был корректен, вызывает ValueError в противном случае"""
+        """Возвращает True, если ввод был корректен, вызывает ошибку в обратном случае"""
 
         if (input.isdigit() and 1 <= int(input) <= 9):
             if (self.field[int(input) - 1] not in ['X', '0']):
@@ -40,8 +40,8 @@ class TicTacGame:
         win_combinations = ((0, 1, 2), (3, 4, 5), (6, 7, 8),
                             (0, 3, 6), (1, 4, 7), (2, 5, 8),
                             (0, 4, 8), (2, 4, 6))
-        for combination in win_combinations:
-            if self.field[combination[0]] == self.field[combination[1]] == self.field[combination[2]]:
+        for comb in win_combinations:
+            if self.field[comb[0]] == self.field[comb[1]] == self.field[comb[2]]:
                 return True
         return False
 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
             try:
                 game.validate_input(position)
             except ValueError:
-                print('Wrong input! It is allowed only to input numbers from 1 to 9!\nTry one more time: ')
+                print('Wrong input! Input numbers from 1 to 9!\nTry one more time: ')
             except RuntimeError:
                 print('Wrong input! This cell is already occupied!\nTry one more time: ')
             else:
