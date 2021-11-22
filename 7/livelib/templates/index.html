@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Library</title>
+    <link rel="stylesheet"
+ href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/application.css' %}" />
+  </head>
+
+  <body>
+  <header>      
+  <nav class="navbar navbar-default">            
+    <a class="navbar-brand" href="/">{{header}}</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="/add_review"> {{menu.add}}                         
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/edit_review"> {{menu.edit}}                       
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/delete_review"> {{menu.delete}}                       
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/review_list"> {{menu.list}}
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/search"> {{menu.search}} </a>           
+      </li>
+      <li class="nav-item">
+      <span class="navbar-text"> {{menu.hello}} </span> </li>          
+  </nav>
+</header> 
+<main class="container">       
+  <div class="row">           
+    <div class="col text-center">
+    <img src= " {% static 'img/booklibrary.png' %} "
+  	width="255" height="255" alt="image">  
+    </div> 
+    <div class = "row">
+    	<div class = "text-center">
+    	<span class="maintext"> {{main}} </span>
+    	</div>
+    </div>               
+  </div>           
+</main>
+<footer class="footer">        
+  <div class="navbar-fixed-bottom">            
+    <p class="footer-text"> {{footer}} </p>
+  </div>    
+</footer>
+  </body>
+</html>

@@ -1,13 +1,29 @@
 from json.encoder import JSONEncoder
+from django.db.models.query import QuerySet
 from django.http.response import HttpResponseBadRequest, HttpResponseNotAllowed, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from books.models import Book
 from reviews.models import Review
 from books.models import Book
 from users.models import User
 from django.template import loader
 from django.urls import reverse
+from rest_framework import viewsets
+from rest_framework.response import Response
+from reviews.serializers import ReviewSerializer
 import datetime
+
+class ReviewViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Review.objects.all()
+        serializer = ReviewSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        querySet = Review.objects.all()
+        review = get_object_or_404(querySet, pk=pk)
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
 
 def index(request):
     header = "LIVELIB"                
@@ -44,6 +60,7 @@ def create_review(request):
         user = request.POST.get('user')
         created_at = str(datetime.datetime.now())
 
+        serializer = ReviewSerializer(data={'book': name, 'review': review_text, 'rating': score, 'created_at': created_at, 'user': user})
         try:
             book_obj = Book.objects.get(name=name, author=author)
             user_obj = User.objects.get(username=user)
@@ -52,8 +69,11 @@ def create_review(request):
         except User.DoesNotExist:
             return HttpResponseBadRequest("Не найден пользователь")
         else:
-            Review.objects.create(book=book_obj, review=review_text, rating=score, created_at=created_at, user=user_obj)
-            return JsonResponse(request.POST, json_dumps_params={"ensure_ascii": False})
+            if serializer.is_valid():
+                Review.objects.create(book=book_obj, review=review_text, rating=score, created_at=created_at, user=user_obj)
+                return JsonResponse(request.POST, json_dumps_params={"ensure_ascii": False})
+            else:
+                return HttpResponseBadRequest(f'Incorrect field: {serializer.errors}')
     else:
         return HttpResponseNotAllowed(['POST'])
     
