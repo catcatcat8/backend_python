@@ -1,0 +1,12 @@
+{% load static %}
+
+<form action="/edit_review/edited/" method="post" name="form">
+    <br>
+    {{book}} <input name="name" type="text" value=""><br><br>
+    {{author}} <input name="author" type="text" value=""><br><br>
+    {{user}} <input name="user" type="text" value=""><br><br>
+    {{new_text}} <input name="new_text" type="text" value=""><br><b<br>
+    {{new_score}} <input name="new_score" type="number" value=""><br><b<br>
+  
+    <input type="submit" name="add" value="edit_review">
+</form>

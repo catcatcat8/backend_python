@@ -1,0 +1,10 @@
+{% load static %}
+
+<form action="/delete_review/deleted/" method="{{method}}" name="form">
+    <br>
+    {{book}} <input name="name" type="text" value=""><br><br>
+    {{author}} <input name="author" type="text" value=""><br><br>
+    {{user}} <input name="user" type="text" value=""><br><br>
+  
+    <input type="submit" name="add" value="{{value}}">
+</form>
