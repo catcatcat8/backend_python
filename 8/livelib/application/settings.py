@@ -84,9 +84,6 @@ TEMPLATES = [
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-SOCIAL_AUTH_VK_OAUTH2_KEY = '8019992'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = '1RN31LHH79qRP7dJFm8n'
-
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = 'login'
@@ -98,8 +95,6 @@ SOCIAL_AUTH_VK_OAUTH2_SCOPE = [
   'notify',
   'friends',
   'email',]
-
-SOCIAL_AUTH_VK_OAUTH2_API_VERSION = '5.831'
 
 WSGI_APPLICATION = 'application.wsgi.application'
 
